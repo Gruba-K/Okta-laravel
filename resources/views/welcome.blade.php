@@ -45,7 +45,7 @@
                                 <input type="text" class="form-control" id="name" placeholder="Please Enter your FullName" required>
                             </div>
                             <div class="mb-3">
-                                <label for="">Passwords</label>
+                                <label for="">Password</label>
                                 <input type="password" class="form-control" id="Pass" placeholder="Please Enter your Password" required>
                             </div>
                         </div>
