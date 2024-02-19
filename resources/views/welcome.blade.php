@@ -33,8 +33,8 @@
                             <a href="#" class="text-success fw-bold text-decoration-none">Welcome {{ Auth::user()->name }}</a>
                             <a href="{{ route('logout') }}" class="text-danger fw-bold text-decoration-none" style="border-left:2px solid white; padding-left:10px; margin-right:10px;">Log out</a>
                             @else
-                            {{-- <a href="{{ url('login/okta') }}" class="text-success fw-bold text-decoration-none">Login</a> --}}
-                            <a href="#" class="text-success fw-bold text-decoration-none" id="login">Login</a>
+                            <a href="{{ url('login/okta') }}" class="text-success fw-bold text-decoration-none">Login</a>
+                            {{-- <a href="#" class="text-success fw-bold text-decoration-none" id="login">Login</a> --}}
                             <a href="#" class="text-primary fw-bold text-decoration-none" id='register'>Register</a>
                             
                             @endif
@@ -75,7 +75,7 @@
                 var data = {
                     'email':$("#email").val(), 
                     'name':$("#name").val(),
-                    'password':$("#pass").val(),
+                    'password':$("#Pass").val(),
                     '_token':token,
                 }
                 $.ajax({

@@ -27,8 +27,8 @@ Route::get('/home',function(){
     return view('welcome',$data);
 });
 // login
-// Route::get('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
-Route::post('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
+Route::get('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
+// Route::post('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
 Route::get('logout', [LoginController::class,'logout'])->name('logout');
 Route::get('authorization-code/callback', [LoginController::class, 'handleProviderCallback']);
 // Register
