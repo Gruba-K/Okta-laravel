@@ -11,7 +11,14 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         <!-- Styles -->
-        @vite(['resources/sass/app.scss','resources/js/app.js','resources/css/app.css'])
+        @vite([
+            'resources/js/app.js',
+            'resources/sass/app.scss',
+            'resources/css/app.css',
+            
+            
+        ])
+        
       
     </head>
     <body class="antialiased">
@@ -22,11 +29,12 @@
                     <div class="card-head d-flex justify-content-between">
                          
                            
-                            @if(isset($user))
-                            <a href="#" class="text-success fw-bold text-decoration-none">Welcome {{ $user }}</a>
+                            @if(Auth::check())
+                            <a href="#" class="text-success fw-bold text-decoration-none">Welcome {{ Auth::user()->name }}</a>
                             <a href="{{ route('logout') }}" class="text-danger fw-bold text-decoration-none" style="border-left:2px solid white; padding-left:10px; margin-right:10px;">Log out</a>
                             @else
-                            <a href="{{ url('login/okta') }}" class="text-success fw-bold text-decoration-none">Login</a>
+                            {{-- <a href="{{ url('login/okta') }}" class="text-success fw-bold text-decoration-none">Login</a> --}}
+                            <a href="#" class="text-success fw-bold text-decoration-none" id="login">Login</a>
                             <a href="#" class="text-primary fw-bold text-decoration-none" id='register'>Register</a>
                             
                             @endif
@@ -57,7 +65,66 @@
         </div>
        
     </body>
-    <script>
 
+    <script type="module" defer>
+        var token = "{{ csrf_token() }}";
+        var url = "{{ url('/register_post') }}";
+        var url1 = "{{ url('/login/okta') }}";
+        $(document).ready(function(){
+            $("#register").click(function(){
+                var data = {
+                    'email':$("#email").val(), 
+                    'name':$("#name").val(),
+                    'password':$("#pass").val(),
+                    '_token':token,
+                }
+                $.ajax({
+                    url:url,
+                    data:data,
+                    type:'POST',
+                    success:function(res){
+                        
+                        if(res['msg'] == "Success"){
+                            alert('Successfully Registered');
+                            window.location.reload();
+                        }
+                    },
+                    error:function(res){
+
+                        console.log(res);
+                    }
+                })
+            });
+            $("#login").click(function(){
+                var data = {
+                    'email':$("#email").val(), 
+                    'name':$("#name").val(),
+                    'password':$("#Pass").val(),
+                    '_token':token,
+                };
+                console.log(data);
+                $.ajax({
+                    url:url1,
+                    data:data,
+                    type:'POST',
+                    success:function(res){
+                        
+                        if(res['msg'] == "Success"){
+                            alert('Successfully Registered');
+                            window.location.reload();
+                        }else{
+                            window.location.reload();
+                        }
+
+                    },
+                    error:function(res){
+
+                        console.log(res);
+                    }
+                })
+            });
+        });
+        
     </script>
+   
 </html>

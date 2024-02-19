@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('/home',function(){
     ];
     return view('welcome',$data);
 });
-Route::get('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
+// login
+// Route::get('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
+Route::post('login/okta', [LoginController::class,'redirectToProvider'])->name('login-okta');
 Route::get('logout', [LoginController::class,'logout'])->name('logout');
 Route::get('authorization-code/callback', [LoginController::class, 'handleProviderCallback']);
+// Register
+Route::post('/register_post',[LoginController::class,'register_post']);
